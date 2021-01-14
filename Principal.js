@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet,View,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import {StyleSheet,View,Image,TouchableOpacity,ImageBackground,Text} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import {Contexto} from './Contexto';
 
 
@@ -8,15 +9,17 @@ var rutaLogo= require("./imagenes/logo.png")
 
 
 class Principal extends React.Component{
+    confirmar=()=>{alert("Sesion CerradO OK")}
     render(){
         return (<View style={miestilo.contenedor}>
                 <ImageBackground source={rutaFondo} style={miestilo.imagenFondo}>
-                    <View style={miestilo.caja}>
-                        <TouchableOpacity activeOpacity={0.2} onPress={()=>this.props.navigation.navigate("Acceso")}>
-                            <Image style={miestilo.logo} source={require("./imagenes/logo.png")} style={miestilo.logo}/>
-                        </TouchableOpacity>
-                    </View>
-                </ImageBackground>
+                     <ScrollView>
+                        <Text style={miestilo.titulo}>Bienvenido al sistema</Text>
+                        <TouchableOpacity style={miestilo.botonCerrar} onPress={this.confirmar}>
+                            <Text style={miestilo.textoBoton}>Cerrar Sesion</Text>
+                         </TouchableOpacity>
+                    </ScrollView>
+                  </ImageBackground>
             </View>
         )
     }
@@ -45,6 +48,12 @@ const miestilo=StyleSheet.create(
             borderRadius:360,
             marginLeft:50
         },
+        titulo:{
+            fontSize:30,
+            color:"white",
+            marginBottom:10,
+            fontWeight:"bold"
+        },
         logo:{
             resizeMode:"contain",
             height:150,
@@ -53,6 +62,16 @@ const miestilo=StyleSheet.create(
             transform:[{scale:1.5}],
             marginLeft:60,
             marginTop:-25
+        },
+        botonCerrar:{
+            width:"80%",
+            backgroundColor:"red",
+            borderRadius:25,
+            height:50,
+            alignItems:"center",
+            justifyContent:"center",
+            marginTop:10, 
+            marginBottom:10
         }
     }
 );

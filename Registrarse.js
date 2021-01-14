@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,View,Image,TouchableOpacity,Text,ImageBackground,TextInput} from 'react-native';
+import {StyleSheet,View,Image,TouchableOpacity,Text,ImageBackground,TextInput, Button} from 'react-native';
 import {Contexto} from './Contexto';
 
 
@@ -7,31 +7,58 @@ var rutaFondo=require("./imagenes/fondo.jpg");
 var rutaLogo= require("./imagenes/logo.png")
 
 
-class Acceso extends React.Component{
+class Registrarse extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            nombre:'',
+            apellido:'',
+            usuario:'',
+            clave:''
+        }
+    }
+    activarDesactivar(){
+        var estado=false;
+            if(!this.state.nombre)
+                estado=true;
+            if(!this.state.apellido)
+                estado=true;    
+            if(!this.state.usuario)
+                estado=true;
+            if(!this.state.clave)
+                estado=true;
+
+        return estado;
+    }
+    confirmacion=()=>{
+        alert("Grabado OK")
+        this.props.navigation.navigate("Acceso")
+    }
     render(){
         return(
              <ImageBackground source={rutaFondo} style={miestilo.imagenFondo}>
                 <View style={miestilo.contenedor}>
-                    <Text style={miestilo.titulo}>Acceso al sistema</Text>
+                    <Text style={miestilo.titulo}>Registro de Usuario</Text>
                     <View style={miestilo.vistaImput}>
-                        <TextInput style={miestilo.textoImput} placeholder="Usuario..."/>
+                        <TextInput style={miestilo.textoImput} secureTextEntry placeholder="Nombre(s)" onChangeText={(nombre)=>this.setState({nombre})} />
                      </View>
                      <View style={miestilo.vistaImput}>
-                        <TextInput style={miestilo.textoImput} secureTextEntry placeholder="Clave.."/>
+                        <TextInput style={miestilo.textoImput} placeholder="Apellido(s)" onChangeText={(apellido)=>this.setState({apellido})}/>
                      </View>
-                <TouchableOpacity style={miestilo.botonIngresar} onPress={()=> this.props.navigation.navigate("Principal")}>
-                    <Text style={miestilo.textoBoton}>Ingrear</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={miestilo.botonRegistrarse} onPress={()=> this.props.navigation.navigate("Registrarse")}>
-                    <Text style={miestilo.textoBoton}>Registrarse</Text>
-                </TouchableOpacity>
+                     <View style={miestilo.vistaImput}>
+                        <TextInput style={miestilo.textoImput} placeholder="Usuario" onChangeText={(usuario)=>this.setState({usuario})}/>
+                     </View>
+                     <View style={miestilo.vistaImput}>
+                        <TextInput style={miestilo.textoImput} secureTextEntry placeholder="Clave" onChangeText={(clave)=>this.setState({clave})}/>
+                     </View>
+                     <Button disabled={this.activarDesactivar()} title="Registrar" onPress={this.confirmacion} />
                 </View>
             </ImageBackground>
         )
     }
 }
 
-Acceso.contextType = Contexto;   //----- Contexto global
+Registrarse.contextType = Contexto;   //----- Contexto global
 
 
 const miestilo=StyleSheet.create(
@@ -93,4 +120,4 @@ const miestilo=StyleSheet.create(
     }
 );
 
-export default Acceso;
+export default Registrarse;
