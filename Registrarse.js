@@ -1,11 +1,23 @@
 import React from 'react';
 import {StyleSheet,View,Image,TouchableOpacity,Text,ImageBackground,TextInput, Button} from 'react-native';
 import {Contexto} from './Contexto';
+import {db} from './ConectarFirebase' ;
 
 
 var rutaFondo=require("./imagenes/fondo.jpg");
 var rutaLogo= require("./imagenes/logo.png")
 
+
+
+function insertarDatos(nom,ape,user,clave){
+    db.ref('registro/').push({
+        nombre:nom,
+        apellido:ape,
+        usuario:user,
+        clave:clave
+     }
+    );
+}
 
 class Registrarse extends React.Component{
     constructor(props){
@@ -32,8 +44,12 @@ class Registrarse extends React.Component{
     }
     confirmacion=()=>{
         alert("Grabado OK")
-        this.props.navigation.navigate("Acceso")
+        this.props.navigation.navigate("Inicio")
     }
+    evento=()=>{
+        insertarDatos(this.state.nombre,this.state.apellido,this.state.usuario,this.state.clave)
+        alert("Grabado");
+    };
     render(){
         return(
              <ImageBackground source={rutaFondo} style={miestilo.imagenFondo}>
@@ -51,7 +67,7 @@ class Registrarse extends React.Component{
                      <View style={miestilo.vistaImput}>
                         <TextInput style={miestilo.textoImput} secureTextEntry placeholder="Clave" onChangeText={(clave)=>this.setState({clave})}/>
                      </View>
-                     <Button disabled={this.activarDesactivar()} title="Registrar" onPress={this.confirmacion} />
+                     <Button disabled={this.activarDesactivar()} title="Registrar" onPress={this.evento} />
                 </View>
             </ImageBackground>
         )
