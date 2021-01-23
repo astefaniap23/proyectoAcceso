@@ -12,7 +12,8 @@ import Registrarse from './Registrarse';
 import Menu from './Menu';
 import Mantenimiento from './Mantenimiento';
 import FormularioInsertar from './FormularioInsertar' ;
-
+import Listar from './Listar';
+import ListarUsuarios from './ListarUsuarios';
 
 
 const Stack = createStackNavigator();
@@ -22,7 +23,7 @@ class App extends React.Component{
     return(<Contexto.Provider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Registrarse"
+            initialRouteName="Menu"
             screenOptions={{headerShown:false}}>
               <Stack.Screen 
                name="Inicio" component={Inicio}/>  
@@ -38,6 +39,10 @@ class App extends React.Component{
                name="Mantenimiento" component={Mantenimiento}/>  
               <Stack.Screen 
                name="FormularioInsertar" component={FormularioInsertar}/>  
+                <Stack.Screen 
+               name="Listar" component={Listar}/>  
+                <Stack.Screen 
+               name="ListarUsuarios" component={ListarUsuarios}/>  
           </Stack.Navigator>
         </NavigationContainer>
         </Contexto.Provider>

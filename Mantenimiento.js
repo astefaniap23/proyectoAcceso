@@ -8,6 +8,7 @@ export default class Mantenimiento extends Component{
             <View>
                 <Text>Mantenimiento</Text>
                 <Button title="Insertar Registros" onPress={()=> this.props.navigation.navigate("FormularioInsertar")} />
+                <Button title="Listar Registros" color="red" onPress={()=> this.props.navigation.navigate("Listar")} />
             </View>
         );
     }
